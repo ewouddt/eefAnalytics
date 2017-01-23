@@ -76,6 +76,7 @@ plotObject <- function(analyticObject,group=NULL, compare=FALSE,modelNames=FALSE
       hist(tmp2,breaks=30,col="white",border="cornflowerblue",xlab="Bootstrap estimates",main="")
       abline(v=obs.est,col="red",lwd=2,lty=1)
       abline(v=0,col="grey48",lwd=2,lty=1)
+      legend("topright",c("Observed Estimate","Zero-Line"),col=c("red","grey48"),bty="n",lty=1,lwd=2)
       
     }
     
@@ -89,6 +90,8 @@ plotObject <- function(analyticObject,group=NULL, compare=FALSE,modelNames=FALSE
       hist(tmp2,breaks=30,col="white",border="cornflowerblue",xlab="Permutation values",main=paste("P(X|NULL)=",pvalue,sep=""))
       abline(v=obs.est,col="red",lwd=2,lty=2)
       abline(v=-obs.est,col="red",lwd=2,lty=2)
+      legend("topright",c("(-) Observed Estimate"),col=c("red"),bty="n",lty=2,lwd=2)
+      
     }
     
     
@@ -132,6 +135,7 @@ plotObject <- function(analyticObject,group=NULL, compare=FALSE,modelNames=FALSE
       hist(tmp2,breaks=30,col="white",border="cornflowerblue",xlab="Bootstrap estimates",main="")
       abline(v=obs.est,col="red",lwd=2,lty=1)
       abline(v=0,col="grey48",lwd=2,lty=1)
+      legend("topright",c("Observed Estimate","Zero-Line"),col=c("red","grey48"),bty="n",lty=1,lwd=2)
     }
     
     
@@ -144,6 +148,7 @@ plotObject <- function(analyticObject,group=NULL, compare=FALSE,modelNames=FALSE
       hist(tmp2,breaks=30,col="white",border="cornflowerblue",xlab="Permutation values",main=paste("P(X|NULL)=",pvalue,sep=""))
       abline(v=obs.est,col="red",lwd=2,lty=2)
       abline(v=-obs.est,col="red",lwd=2,lty=2)
+      legend("topright",c("(-) Observed Estimate"),col=c("red"),bty="n",lty=2,lwd=2)
     }
     
     
