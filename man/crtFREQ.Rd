@@ -7,18 +7,15 @@
 crtFREQ(formula, random, intervention, nPerm = NULL, nBoot = NULL, data)
 }
 \arguments{
-\item{formula}{the model to be analysed. It is of the form y ~ x1+x2+....
-Where y is the outcome variable and Xs are the predictors.}
+\item{formula}{the model to be analysed. It is of the form y ~ x1+x2+.... Where y is the outcome variable and Xs are the predictors.}
 
-\item{random}{a string variable specifying the "clustering variable" as contained in the data. 
-See example below}
+\item{random}{a string variable specifying the "clustering variable" as contained in the data. See example below}
 
-\item{intervention}{a string variable specifying the "intervention variable" as appeared in the formula.
-See example below}
-
-\item{nBoot}{number of bootstraps required to generate bootstrap confidence interval. Default is NULL.}
+\item{intervention}{a string variable specifying the "intervention variable" as appeared in the formula. See example below}
 
 \item{nPerm}{number of permutations required to generate permutated p-value.  Default is NULL.}
+
+\item{nBoot}{number of bootstraps required to generate bootstrap confidence interval. Default is NULL.}
 
 \item{data}{data frame containing the data to be analysed.}
 }
@@ -26,32 +23,18 @@ See example below}
 S3 object; a list consisting of
 \itemize{
 \item \code{Beta}. Estimates and confidence intervals for preditors specified in the model.
-
-\item \code{ES}. Hedges' g effect size for the intervention(s). If nBoot is not specified, 
-the confidence intervals are 95% CIs based on standard errors. If nBoot is specified, 
-they are non-parametric bootstrapped confidence intervals.
-
-\item \code{covParm}. Vector of variance decomposition into between cluster variance (Schools) 
-and within cluster variance (Pupils). It also contains the intral-cluster correlation (ICC).
-
+\item \code{ES}. Hedges' g effect size for the intervention(s). If nBoot is not specified, the confidence intervals are 95% CIs based on standard errors. If nBoot is specified, they are non-parametric bootstrapped confidence intervals.
+\item \code{covParm}. Vector of variance decomposition into between cluster variance (Schools) and within cluster variance (Pupils). It also contains the intral-cluster correlation (ICC).
 \item \code{SchEffects}. Random intercepts for clusters, e.g schools.
-
-\item \code{Perm}. A "nPerm x w" matrix containing permutated effect sizes using residual variance and total variance. 
-"w" denotes number of intervention. "w=1" for two arm trial and "w=2" for three arm trial excluding the control group.
-It is produced only when \code{nPerm} is specified.
-
-\item \code{Bootstrap}. A "w x nBoot" matrix containing the bootstrapped effect sizes using residual variance (Within) and total variance (Total). 
-"w=1" for two arm trial and "w=2" for three arm trial excluding the control group.
-It is only prduced when \code{nBoot} is specified.
-
-
+\item \code{Perm}. A "nPerm x w" matrix containing permutated effect sizes using residual variance and total variance. "w" denotes number of intervention. "w=1" for two arm trial and "w=2" for three arm trial excluding the control group. It is produced only when \code{nPerm} is specified.
+\item \code{Bootstrap}. A "w x nBoot" matrix containing the bootstrapped effect sizes using residual variance (Within) and total variance (Total). "w=1" for two arm trial and "w=2" for three arm trial excluding the control group. It is only prduced when \code{nBoot} is specified.
 }
 }
 \description{
 \code{crtFREQ} performs Analysis of cluster randomised education trial using multilevel model under the frequentist framework.
 }
 \examples{
-
+if(interactive()){
 
 data(crtData)
 
@@ -113,7 +96,6 @@ ES3
 ### plot permutated values
 
 plot(output3, group=1)
-
-
+}
 }
 

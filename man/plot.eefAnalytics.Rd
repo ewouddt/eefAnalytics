@@ -10,7 +10,7 @@
 \item{x}{an output object from the eefAnalytics package.}
 
 \item{group}{a value indicating which intervention to plot.
-This must not be greater than the number of intervention excluing the control group.
+This must not be greater than the number of intervention excluding the control group.
 For a two arm trial, the maximum value is 1 and a maximum value of 2 for three arm trial.}
 
 \item{...}{arguments passed to \code{\link[graphics]{plot.default}}}
@@ -22,17 +22,19 @@ Returns relevant plots for each model.
 plots different figures based on output from eefAnalytics package.
 }
 \details{
-Plot produces graphical visualisation depending on which model is fitted. For \code{srtFREQ()}, 
-plot can only be used when nBoot or nPerm is specified to visualise the distribution of boostrapped or permutated values. 
-For \code{crtFREQ()} or \code{mstFREQ}, plot shows the dirstribution of random intercepts when "group=NULL". 
-It produces histogram of permutated or bootstrapped values when "group" is specified and either nBoot or nPerm is also specified. 
-For \code{mlmBayes()}, plot produces the distrbution of random intercepts when "group = NULL". 
-It produces the probability of effect size to be greater than a pre-specified threshold when group is specified. Lastly, 
-plot produces forest plots to compare CACE estimated for different level of compliance when \code{caceSRTBoot()} or 
+Plot produces graphical visualisation depending on which model is fitted:
+\itemize{
+\item For \code{srtFREQ()}, plot can only be used when \code{nBoot} or \code{nPerm} is specified to visualise the distribution of boostrapped or permutated values. 
+\item For \code{crtFREQ()} or \code{mstFREQ}, plot shows the distribution of random intercepts when \code{group=NULL}. 
+It produces histogram of permutated or bootstrapped values when \code{group} is specified and either \code{nBoot} or \code{nPerm} is also specified. 
+\item For \code{mlmBayes()}, plot produces the distrbution of random intercepts when \code{group = NULL}. 
+It produces the probability of effect size to be greater than a pre-specified threshold when group is specified. 
+\item Lastly, plot produces forest plots to compare CACE estimated for different level of compliance when \code{caceSRTBoot()} or 
 \code{caceCRTBoot()} or \code{caceMSTBoot()} is used.
 }
+}
 \examples{
-
+if(interactive()){
 
 #### read data
 data(mstData)
@@ -102,7 +104,7 @@ plot(outputMSTbayes,group=1)
 ##### CRT #####
 ###############
 
-#### Ranodm intercepts
+#### Random intercepts
 outputCRT <- crtFREQ(Posttest~ Intervention + Prettest, random = "School", 
                      intervention = "Intervention", data = crtData)
 plot(outputCRT)
@@ -151,7 +153,6 @@ outputCRTCace <- caceCRTBoot(Posttest~ Intervention + Prettest,random="School",
                              intervention = "Intervention",compliance="Percentage_Attendance",
                              nBoot=1000, data = crtData) 
 plot(outputCRTCace)
-
-
+}
 }
 

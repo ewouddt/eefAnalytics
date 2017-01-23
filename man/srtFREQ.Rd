@@ -7,11 +7,9 @@
 srtFREQ(formula, intervention, nBoot = NULL, nPerm = NULL, data)
 }
 \arguments{
-\item{formula}{the model to be analysed. It is of the form y~x1+x2+....
-Where y is the outcome variable and Xs are the predictors.}
+\item{formula}{the model to be analysed. It is of the form y~x1+x2+.... Where y is the outcome variable and Xs are the predictors.}
 
-\item{intervention}{a string variable specifying the "intervention variable" as appeared in the formula.
-See example below}
+\item{intervention}{a string variable specifying the "intervention variable" as appeared in the formula. See example below}
 
 \item{nBoot}{number of bootstraps required to generate bootstrap confidence interval. Default is NULL.}
 
@@ -22,14 +20,10 @@ See example below}
 \value{
 S3 object; a list consisting of
 \itemize{
-\item \code{Beta}. Estimates and confidence intervals for the predictors specified 
-in the model.
-\item \code{ES}. Hedges' g effect size for the intervention(s). If nBoot is not specified, 
-the confidence intervals are 95% CIs based on standard errors. If nBoot is specified, 
-they are non-parametric bootstrapped confidence intervals.
+\item \code{Beta}. Estimates and confidence intervals for the predictors specified in the model.
+\item \code{ES}. Hedges' g effect size for the intervention(s). If nBoot is not specified, the confidence intervals are 95% CIs based on standard errors. If nBoot is specified, they are non-parametric bootstrapped confidence intervals.
 \item \code{sigma2}. Residual variance.
-\item \code{Perm}. A vector containing permutated effect sizes under null hypothesis. 
-It is produced only if \code{nPerm} is specified.
+\item \code{Perm}. A vector containing permutated effect sizes under null hypothesis. It is produced only if \code{nPerm} is specified.
 \item \code{Bootstrap}. A vector containing bootstrapped effect sizes. It is prduced only if \code{nBoot} is specified.
 }
 }
@@ -38,6 +32,7 @@ It is produced only if \code{nPerm} is specified.
 This can also be used with schools as fixed effects.
 }
 \examples{
+if(interactive()){
 
 data(mstData)
 
@@ -123,6 +118,6 @@ ES6
 ### plot bootstrapped values
 
 plot(output6, group=1)
-
+}
 }
 
