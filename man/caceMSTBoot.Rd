@@ -7,22 +7,27 @@
 caceMSTBoot(formula, random, intervention, compliance, nBoot, data)
 }
 \arguments{
-\item{formula}{specifies the model to be analysed. It is of the form y ~ x1+x2+....}
+\item{formula}{the model to be analysed. It is of the form y ~ x1+x2+....
+Where y is the outcome variable and Xs are the predictors.}
 
-\item{random}{a string variable specifying the "cluster variable" as contained in the data.}
+\item{random}{a string variable specifying the "clustering variable" as contained in the data. 
+See example below}
 
-\item{intervention}{a string variable specifying the intervention variable in the formula.}
+\item{intervention}{a string variable specifying the "intervention variable" as appeared in the formula.
+See example below}
 
-\item{compliance}{a string variable specifying the "compliance variable" as contained in the data. The data must be in percentages ranging from 0 - 100.}
+\item{compliance}{a string variable specifying the "compliance variable" as contained in the data. 
+The data must be in percentages ranging from 0 - 100.}
 
-\item{nBoot}{specifies number of bootstrap samples for non-parametric bootstrap confidence interval. Default is NULL.}
+\item{nBoot}{number of bootstraps required to generate bootstrap confidence interval. Default is NULL.}
 
-\item{data}{a data frame containing the data to be analysed.}
+\item{data}{data frame containing the data to be analysed.}
 }
 \value{
 S3 object; a list consisting of
 \itemize{
-\item \code{CACE}. Estimates of CACE adjusted effect sizes based on pre-specified thresholds. Only produced for threshhold with atleast 50% compliance rate.
+\item \code{CACE}. Estimates of CACE adjusted effect sizes based on pre-specified thresholds. 
+Only produced for threshhold with at least 50% compliance rate.
 \item \code{Compliers}. Percentage of pupils that achieved a pre-specified threshold of compliance.
 }
 }
@@ -30,66 +35,26 @@ S3 object; a list consisting of
 \code{caceMSTBoot} performs exploratory CACE analysis of multisite randomised education trials.
 }
 \examples{
-if(interactive()){
+
 
 data(mstData)
 
-########################################################
-## MLM analysis of multisite trials + 1.96SE ##
-########################################################
+######################## weighted ITT ##############################################
 
-output1 <- mstFREQ(Posttest~ Intervention+Prettest,random="School",
-		intervention="Intervention",data=mstData)
+caceOutput<- caceMSTBoot(Posttest~ Prettest+ Intervention,
+			random="School",intervention="Intervention",
+			compliance = "Percentage_Attendance",nBoot=1000,data=mstData)
 
+cace <- caceOutput$CACE
+cace
 
-### Fixed effects
-beta <- output1$Beta
-beta
+Complier <- caceOutput$Compliers
+Complier 
 
-### Effect size
-ES1 <- output1$ES$Intervention1
-ES1
+### visualising CACE effect size
 
-## Covariance matrix
-covParm <- output1$covParm
-covParm
+plot(caceOutput)
 
-### plot random effects for schools
-
-plotObject(analyticObject=output1)
-
-###############################################
-## MLM analysis of multisite trials          ##	 
-## with bootstrap confidence intervals       ##
-###############################################
-
-output2 <- mstFREQ(Posttest~ Intervention+Prettest,random="School",
-		intervention="Intervention",nBoot=1000,data=mstData)
-
-
-### Effect size
-
-ES2 <- output2$ES
-ES2
-
-### plot bootstrapped values 
-
-plotObject(analyticObject=output2, group=1)
-
-#######################################################################
-## MLM analysis of mutltisite trials with permutation p-value##
-#######################################################################
-
-output3 <- mstFREQ(Posttest~ Intervention+Prettest,random="School",
-		intervention="Intervention",nPerm=1000,data=mstData)
-
-
-#### plot permutated values 
-
-plotObject(analyticObject=output3, group=1)
-
-
-}
 
 
 }

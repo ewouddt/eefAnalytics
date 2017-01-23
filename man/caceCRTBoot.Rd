@@ -7,22 +7,27 @@
 caceCRTBoot(formula, random, intervention, compliance, nBoot, data)
 }
 \arguments{
-\item{formula}{specifies the model to be analysed. It is of the form y ~ x1+x2+....}
+\item{formula}{the model to be analysed. It is of the form y ~ x1+x2+....
+Where y is the outcome variable and Xs are the predictors.}
 
-\item{random}{a string variable specifying the "cluster" as contained in the data.}
+\item{random}{a string variable specifying the "clustering variable" as contained in the data. 
+See example below}
 
-\item{intervention}{a string variable specifying the intervention variable in the formula.}
+\item{intervention}{a string variable specifying the "intervention variable" as appeared in the formula.
+See example below}
 
-\item{compliance}{a string variable specifying the "compliance variable" as contained in the data. The data must be in percentages ranging from 0 - 100.}
+\item{compliance}{a string variable specifying the "compliance variable" as contained in the data. 
+The data must be in percentages ranging from 0 - 100.}
 
-\item{nBoot}{specifies number of bootstrap samples for non-parametric bootstrap confidence interval. Default is NULL.}
+\item{nBoot}{number of bootstraps required to generate bootstrap confidence interval. Default is NULL.}
 
-\item{data}{a data frame containing the data to be analysed.}
+\item{data}{data frame containing the data to be analysed.}
 }
 \value{
 S3 object; a list consisting of
 \itemize{
-\item \code{CACE}. Estimates of CACE adjusted effect sizes based on pre-specified thresholds. Only produced for threshhold with atleast 50% compliance rate.
+\item \code{CACE}. Estimates of CACE adjusted effect sizes based on pre-specified thresholds. 
+Only produced for threshhold with at least 50% compliance rate.
 \item \code{Compliers}. Percentage of pupils that achieved a pre-specified threshold of compliance.
 }
 }
@@ -30,10 +35,10 @@ S3 object; a list consisting of
 \code{caceCRTBoot} performs exploratoty CACE analysis of cluster randomised education trials.
 }
 \examples{
-if(interactive()){
 
 data(crtData)
-############# CRT
+
+######################## weighted ITT ##############################################
 caceOutput<- caceCRTBoot(Posttest~ Prettest+ Intervention,
 			random="School",intervention="Intervention",
 			compliance = "Percentage_Attendance",nBoot=1000,data=crtData)
@@ -46,8 +51,8 @@ Complier
 
 ### visualising CACE effect size
 
-plotObject(analyticObject=ccaceOutput)
+plot(caceOutput)
 
-}
+
 }
 
